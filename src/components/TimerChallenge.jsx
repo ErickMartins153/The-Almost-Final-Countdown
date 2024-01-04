@@ -3,6 +3,7 @@ import ResultModal from "./ResultModal";
 
 export default function TimerChallenge({ title, targetTime }) {
   const timer = useRef();
+  //so now this dialog here refers to the object from useImperativeHandle
   const dialog = useRef();
 
   const [timerStarted, setTimerStarted] = useState(false);
@@ -12,7 +13,7 @@ export default function TimerChallenge({ title, targetTime }) {
     //targetTime is in seconds, setTimeout requires the time in ms
     timer.current = setTimeout(() => {
       setTimerExpired(true);
-      dialog.current.showModal(); //this is a built-in method in the dialog element
+      dialog.current.open(); //now this open method is defined on the ResultModal by the useImperativeHandle
     }, targetTime * 1000);
     //this code bellow will execute right after the timer was set
     //only the function inside setTimeout wont execute now, only when the timer finishes
